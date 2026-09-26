@@ -13,8 +13,8 @@
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
-body{background:var(--bg); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden;}
+html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px); overflow-x:hidden; width:100%; max-width:100%;}
+body{background:var(--bg); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden; width:100%; max-width:100%; position:relative;}
 h1,h2,h3,.disp{font-family:'Space Grotesk',sans-serif;}
 .orb-font{font-family:'Orbitron',sans-serif;}
 ::selection{background:var(--cyan); color:var(--bg);}
@@ -181,7 +181,7 @@ section{position:relative; padding:110px 6vw; max-width:1400px; margin:0 auto; t
 .coverflow-track{position:relative; height:480px; display:flex; align-items:center; justify-content:center; touch-action:pan-y;}
 .cf-card{
   position:absolute; width:340px; min-height:420px; padding:0; border-radius:20px;
-  background:linear-gradient(160deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  background:linear-gradient(160deg, #101d34, #0a1424);
   border:1px solid rgba(255,255,255,.1); backdrop-filter:blur(16px);
   box-shadow:0 10px 40px rgba(0,0,0,.4);
   transition:transform .6s cubic-bezier(.16,.8,.3,1), opacity .6s cubic-bezier(.16,.8,.3,1), box-shadow .6s ease, filter .6s ease;
@@ -220,6 +220,7 @@ section{position:relative; padding:110px 6vw; max-width:1400px; margin:0 auto; t
   .cf-card .cf-thumb{flex:none;}
   .cf-card .cf-body{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;}
   .coverflow-track{height:400px;}
+  .cf-card:not(.active){filter:blur(2px);}
 }
 
 /* ---------- What I build ---------- */
@@ -335,6 +336,8 @@ footer .flinks a:hover{color:var(--cyan);}
 @media(max-width:520px){
   .build-grid, .stats-grid, .contact-grid{grid-template-columns:1fr;}
   section{padding:64px 5vw;}
+  nav{padding-left:4vw; padding-right:4vw;}
+  .brand{font-size:.85rem; white-space:nowrap;}
 
   /* Hero */
   /* Hero */
@@ -684,9 +687,9 @@ const projects = [
   const cards = projects.map((p,i)=>{
     const el = document.createElement('div');
     el.className = 'cf-card';
-    el.innerHTML = `
+     el.innerHTML = `
       <div class="cf-glow"></div>
-      <div class="cf-thumb">${p.title}</div>
+      <div class="cf-thumb">Project ${String(i+1).padStart(2,'0')}</div>
       <div class="cf-body">
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
